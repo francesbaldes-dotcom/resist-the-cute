@@ -1,7 +1,7 @@
 // Offline-Speicher der Web-App (nur im fertigen Build über HTTPS registriert, s. main.ts).
 // Startseite: erst Netz (neue Versionen kommen sofort an), offline aus dem Speicher.
 // Alles andere (Spielcode mit Hash im Namen, Bilder): erst Speicher, sonst Netz – und dabei merken.
-const CACHE = 'resist-the-cute-v1';
+const CACHE = 'resist-the-cute-v2';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './manifest.webmanifest', './icons/apple-touch-icon.png'])));
@@ -11,6 +11,17 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))));
   self.clients.claim();
+});
+
+// Die Seite schickt nach dem ersten Laden die Liste ihrer Dateien – dann geht die App gleich danach offline.
+self.addEventListener('message', (event) => {
+  const urls = event.data && event.data.cache;
+  if (!Array.isArray(urls)) return;
+  event.waitUntil(
+    caches.open(CACHE).then((c) =>
+      Promise.all(urls.map((u) => c.match(u).then((hit) => hit || fetch(u).then((res) => res.ok && c.put(u, res))).catch(() => undefined))),
+    ),
+  );
 });
 
 self.addEventListener('fetch', (event) => {
