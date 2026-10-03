@@ -18,7 +18,7 @@ Voraussichtliches Ergebnis: 9+.
 | Alkohol, Tabak, Drogen | Keine | |
 | Glücksspiel, Lootboxen, Wettbewerbe | Keine | Gold gibt es nur im Spiel. |
 | Medizinische oder Wellness-Themen | Keine | |
-| Uneingeschränkter Webzugriff | Nein | Die App öffnet keine Webseiten. |
+| Uneingeschränkter Webzugriff | Nein | Die App zeigt nur ihre mitgelieferte Datenschutzseite. Links darin öffnen Safari. |
 | Nutzerinhalte, Chat | Nein | |
 | Werbung | Nein | Im App-Build abgeschaltet. |
 | Jugendschutzfunktionen, Altersprüfung | Nein | |
@@ -57,5 +57,6 @@ Resist the Cute is a self-contained, offline tower-defense game.
 - Landscape only. Languages: English and German, following the device language. The language can be changed on the title screen.
 - The cute animals are never harmed: hits release hearts, and defeated animals turn into dizzy fluffy balls and tumble away.
 - How to try it: tap START GAME, tap an empty floor of the tower, build a Cannon, then tap "Wave 1". A short tutorial explains the rest.
+- The privacy policy is linked on the title screen, next to the version number at the bottom right. It opens inside the app, and links to other websites open in Safari.
 - "Save data" on the title screen creates a text code that the player can copy to move a save to another device. Nothing is uploaded.
 ```

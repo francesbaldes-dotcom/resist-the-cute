@@ -13,7 +13,7 @@ Die Länge jedes Feldes ist gegen Apples Limits geprüft. Die Texte beschreiben 
 
 ## Vor dem Veröffentlichen
 
-1. **Platzhalter ersetzen.** In `privacy.html` stehen gelb markierte Platzhalter für Name, Anschrift und E-Mail. `npm run check:privacy` meldet, ob noch welche offen sind. Dieselben Angaben gehören in die Copyright-Zeile von `de.md` und `en.md`.
+1. **Platzhalter ersetzen.** In `privacy.html` stehen gelb markierte Platzhalter für Name, Anschrift und E-Mail. `npm run check:privacy` meldet, ob noch welche offen sind. Die App liefert die Seite mit und zeigt sie über den Link „Datenschutz“ auf dem Titelbildschirm, offene Platzhalter wären also auch in der App sichtbar. `npm run sync:ios` warnt deshalb, solange welche offen sind. Dieselben Angaben gehören in die Copyright-Zeile von `de.md` und `en.md`.
 2. **Seite öffentlich machen.** GitHub Pages liefert nur `main` aus. Nach dem Merge ist die Seite unter https://francesbaldes-dotcom.github.io/resist-the-cute/privacy.html erreichbar. Öffne sie, bevor du die URL in App Store Connect einträgst.
 3. **Eine URL für alles.** Sie enthält die Kontaktdaten und dient als Support-URL und als Datenschutz-URL, in beiden Sprachen.
 

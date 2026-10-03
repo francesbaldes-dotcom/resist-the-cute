@@ -15,7 +15,7 @@ Voraussetzungen: Mac mit aktuellem Xcode, Node.js 20 oder neuer, Mitgliedschaft 
 1. `npm install` – lädt Capacitor und das Haptics-Plugin nach `node_modules/` (Xcode braucht den Ordner).
 2. `npm run sync:ios` – kopiert die Web-Dateien nach `www/`, passt `index.html` für die App an
    (Vollbild-Button samt Safari-Hinweis ausgeblendet, Vibrations-Schalter über die iOS-Haptik,
-   Werbe-Platzhalter des Spiels abgeschaltet)
+   Werbe-Platzhalter des Spiels abgeschaltet, Datenschutz-Link auf dem Titelbildschirm)
    und überträgt alles ins Xcode-Projekt. Nach jedem neuen Build der Web-App wiederholen.
 3. `npm run open:ios` – öffnet das Projekt in Xcode. Beim ersten Öffnen lädt Xcode die Swift-Pakete.
 4. In Xcode unter „Signing & Capabilities“ das eigene Team wählen.
@@ -25,7 +25,9 @@ Voraussetzungen: Mac mit aktuellem Xcode, Node.js 20 oder neuer, Mitgliedschaft 
 6. Für den Upload: Product → Archive, dann „Distribute App“ → App Store Connect.
 
 Bereits eingerichtet: App-Icon (1024 px), Startbildschirm mit Logo, nur Querformat,
-Statusleiste ausgeblendet, Export-Compliance (keine eigene Verschlüsselung), Sprachen Deutsch und Englisch.
+Statusleiste ausgeblendet, Export-Compliance (keine eigene Verschlüsselung), Sprachen Deutsch und Englisch,
+Datenschutz-Link auf dem Titelbildschirm neben der Versionsnummer. Er öffnet die mitgelieferte `privacy.html`
+mit „Zurück zum Spiel“ oben, Links zu fremden Seiten öffnen Safari.
 
 Achtung Werbung: Das Spiel enthält Belohnungs-Werbung nur als Attrappe (Dialog „Werbung (Platzhalter)“).
 Apple lehnt Platzhalter-Inhalte ab, deshalb schaltet `npm run www` sie in der App-Kopie ab. Die Web-Version im
