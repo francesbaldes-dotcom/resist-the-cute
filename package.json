@@ -1,0 +1,19 @@
+{
+  "name": "resist-the-cute",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Resist the Cute – native iOS-App (Capacitor) um die fertige Web-App im Repo-Stamm",
+  "scripts": {
+    "www": "node scripts/prepare-www.mjs",
+    "sync:ios": "npm run www && cap sync ios",
+    "open:ios": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.5.2",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/ios": "^8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.2"
+  }
+}

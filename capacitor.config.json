@@ -1,0 +1,13 @@
+{
+  "appId": "com.francesbaldes.resistthecute",
+  "appName": "Resist the Cute",
+  "webDir": "www",
+  "backgroundColor": "#1b1026",
+  "ios": {
+    "contentInset": "never",
+    "scrollEnabled": false,
+    "allowsLinkPreview": false,
+    "preferredContentMode": "mobile",
+    "backgroundColor": "#1b1026"
+  }
+}
