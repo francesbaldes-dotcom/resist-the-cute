@@ -86,7 +86,7 @@ https://francesbaldes-dotcom.github.io/resist-the-cute/privacy.html
 ## Copyright
 
 ```text
-© 2026 [Vor- und Nachname]
+© 2026 Marius Frances Baldes
 ```
 
 ## Überschriften für die Screenshots (optional)
