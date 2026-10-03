@@ -1,0 +1,81 @@
+# Baut die iOS-App auf einem Mac bei GitHub Actions, ohne Signatur und ohne Upload.
+# Zweck: prüfen, dass Xcode-Projekt, Swift-Pakete (Capacitor, Haptics, Preferences) und die
+# vorbereiteten Web-Dateien zusammen kompilieren. Für den App Store wird weiterhin auf dem
+# Mac archiviert und hochgeladen (siehe README). Für öffentliche Repositories kostenlos.
+name: iOS-Build
+
+on:
+  push:
+    paths:
+      - 'ios/**'
+      - 'scripts/**'
+      - 'assets/**'
+      - 'index.html'
+      - 'privacy.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'capacitor.config.json'
+      - '.github/workflows/ios-build.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Xcode-Build für den Simulator
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Neuestes installiertes Xcode wählen
+        run: |
+          XCODE=$(ls -d /Applications/Xcode*.app | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Web-Dateien vorbereiten und ins Xcode-Projekt übertragen
+        run: npm run sync:ios
+
+      - name: Swift-Pakete auflösen
+        run: xcodebuild -resolvePackageDependencies -project ios/App/App.xcodeproj -scheme App
+
+      - name: Build (Simulator, ohne Signatur)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project ios/App/App.xcodeproj \
+            -scheme App \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY="" DEVELOPMENT_TEAM="" \
+            > xcodebuild.log 2>&1 || { tail -n 200 xcodebuild.log; exit 1; }
+          tail -n 25 xcodebuild.log
+
+      - name: Ergebnis prüfen
+        run: |
+          APP=$(find build/Build/Products -maxdepth 3 -name 'App.app' | head -1)
+          test -n "$APP" || { echo "App.app nicht gefunden"; exit 1; }
+          echo "App gebaut: $APP"
+          test -f "$APP/PrivacyInfo.xcprivacy" && echo "✓ Privacy-Manifest im Bundle" || { echo "Privacy-Manifest fehlt"; exit 1; }
+          test -f "$APP/public/index.html" && echo "✓ Web-Dateien im Bundle" || { echo "Web-Dateien fehlen"; exit 1; }
+          test -f "$APP/public/privacy.html" && echo "✓ Datenschutzseite im Bundle" || { echo "Datenschutzseite fehlt"; exit 1; }
+          grep -q 'ads:{enabled:!1,' "$APP"/public/assets/index-*.js && echo "✓ Werbe-Platzhalter abgeschaltet" || { echo "Werbe-Schalter nicht gesetzt"; exit 1; }
+          grep -q '__rtcTitle' "$APP/public/index.html" && echo "✓ Datenschutz-Link eingebaut" || { echo "Datenschutz-Link fehlt"; exit 1; }
+          plutil -lint "$APP/Info.plist" "$APP/PrivacyInfo.xcprivacy"
+
+      - name: Build-Protokoll sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: xcodebuild.log
+          if-no-files-found: ignore

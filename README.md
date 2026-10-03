@@ -44,6 +44,10 @@ Eintrag in App Store Connect. Das App-Icon ist aus `icons/icon-512.png` hochskal
 besser aus dem Original-Artwork in 1024×1024 neu exportieren nach
 `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png`.
 
+Build-Prüfung ohne Mac: Der Workflow `.github/workflows/ios-build.yml` baut die App bei jedem Push, der das
+iOS-Projekt oder die Web-Dateien berührt, auf einem Mac-Rechner von GitHub Actions. Ohne Signatur und ohne
+Upload, nur als Nachweis, dass alles zusammen kompiliert. Das Ergebnis steht unter „Actions“ im Repository.
+
 Hinweis für den Build-Prozess der Web-App: Beim Veröffentlichen eines neuen Builds in dieses Repo
-dürfen `ios/`, `appstore/`, `scripts/`, `privacy.html`, `package.json`, `package-lock.json`,
+dürfen `ios/`, `appstore/`, `scripts/`, `.github/`, `privacy.html`, `package.json`, `package-lock.json`,
 `capacitor.config.json` und `.gitignore` nicht gelöscht werden.
