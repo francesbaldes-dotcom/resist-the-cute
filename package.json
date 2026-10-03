@@ -6,7 +6,8 @@
   "scripts": {
     "www": "node scripts/prepare-www.mjs",
     "sync:ios": "npm run www && cap sync ios",
-    "open:ios": "cap open ios"
+    "open:ios": "cap open ios",
+    "check:privacy": "node scripts/check-privacy.mjs"
   },
   "dependencies": {
     "@capacitor/core": "^8.5.2",

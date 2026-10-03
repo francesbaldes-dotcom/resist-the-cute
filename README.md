@@ -14,7 +14,8 @@ Voraussetzungen: Mac mit aktuellem Xcode, Node.js 20 oder neuer, Mitgliedschaft 
 
 1. `npm install` – lädt Capacitor und das Haptics-Plugin nach `node_modules/` (Xcode braucht den Ordner).
 2. `npm run sync:ios` – kopiert die Web-Dateien nach `www/`, passt `index.html` für die App an
-   (Vollbild-Button samt Safari-Hinweis ausgeblendet, Vibrations-Schalter über die iOS-Haptik)
+   (Vollbild-Button samt Safari-Hinweis ausgeblendet, Vibrations-Schalter über die iOS-Haptik,
+   Werbe-Platzhalter des Spiels abgeschaltet)
    und überträgt alles ins Xcode-Projekt. Nach jedem neuen Build der Web-App wiederholen.
 3. `npm run open:ios` – öffnet das Projekt in Xcode. Beim ersten Öffnen lädt Xcode die Swift-Pakete.
 4. In Xcode unter „Signing & Capabilities“ das eigene Team wählen.
@@ -26,11 +27,17 @@ Voraussetzungen: Mac mit aktuellem Xcode, Node.js 20 oder neuer, Mitgliedschaft 
 Bereits eingerichtet: App-Icon (1024 px), Startbildschirm mit Logo, nur Querformat,
 Statusleiste ausgeblendet, Export-Compliance (keine eigene Verschlüsselung), Sprachen Deutsch und Englisch.
 
-Vor der Einreichung noch nötig: Datenschutzerklärung als öffentliche URL, Screenshots (iPhone und iPad,
-Querformat), App-Store-Texte, Altersfreigabe. Das App-Icon ist aus `icons/icon-512.png` hochskaliert;
+Achtung Werbung: Das Spiel enthält Belohnungs-Werbung nur als Attrappe (Dialog „Werbung (Platzhalter)“).
+Apple lehnt Platzhalter-Inhalte ab, deshalb schaltet `npm run www` sie in der App-Kopie ab. Die Web-Version im
+Repo-Stamm zeigt sie weiter. Soll sie dort auch verschwinden, im Quellprojekt `ads.enabled` auf `false` setzen.
+
+Store-Texte (Deutsch und Englisch), Antworten für Altersfreigabe und App-Datenschutz sowie eine Datenschutzseite
+stehen in `appstore/` und `privacy.html`. Vor dem Veröffentlichen Platzhalter in `privacy.html` ersetzen
+(`npm run check:privacy` prüft das), Details in `appstore/README.md`. Offen: Screenshots am Gerät und der
+Eintrag in App Store Connect. Das App-Icon ist aus `icons/icon-512.png` hochskaliert;
 besser aus dem Original-Artwork in 1024×1024 neu exportieren nach
 `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png`.
 
 Hinweis für den Build-Prozess der Web-App: Beim Veröffentlichen eines neuen Builds in dieses Repo
-dürfen `ios/`, `scripts/`, `package.json`, `package-lock.json`, `capacitor.config.json` und
-`.gitignore` nicht gelöscht werden.
+dürfen `ios/`, `appstore/`, `scripts/`, `privacy.html`, `package.json`, `package-lock.json`,
+`capacitor.config.json` und `.gitignore` nicht gelöscht werden.

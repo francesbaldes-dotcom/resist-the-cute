@@ -4,7 +4,7 @@
 // weil GitHub Pages von dort ausliefert. Capacitor braucht einen eigenen Ordner, der NUR die
 // Web-Dateien enthält. Dieses Skript kopiert sie nach www/ und passt index.html für die native App an.
 // Aufruf: npm run www   (oder automatisch über: npm run sync:ios)
-import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -18,6 +18,36 @@ for (const item of items) {
 rmSync(www, { recursive: true, force: true });
 mkdirSync(www);
 for (const item of items) cpSync(join(root, item), join(www, item), { recursive: true });
+
+// Platzhalter-Werbung abschalten.
+// Das Spiel enthält Belohnungs-Werbung nur als Attrappe (Dialog "Werbung (Platzhalter) – Hier läuft später
+// ein kurzes Video"). Apple lehnt Platzhalter-Inhalte ab (Richtlinie 2.1), außerdem wäre "keine Werbung"
+// in den Store-Texten sonst falsch. Alle Werbe-Knöpfe hängen an EINEM Schalter in der Spielkonfiguration
+// (ads.enabled). Er wird in der Kopie unter www/ auf false gesetzt, die Web-Version im Repo-Stamm bleibt unberührt.
+// Findet das Skript den Schalter nicht eindeutig (z. B. nach einem neuen Build mit anderer Struktur),
+// bricht es ab, statt die Platzhalter versehentlich auszuliefern.
+const assetsDir = join(www, 'assets');
+const bundles = readdirSync(assetsDir).filter((f) => /^index-.+\.js$/.test(f));
+if (bundles.length !== 1) throw new Error(`Erwartet genau ein Spiel-Bundle in assets/, gefunden: ${bundles.length}`);
+const bundlePath = join(assetsDir, bundles[0]);
+let js = readFileSync(bundlePath, 'utf8');
+const adsOn = /ads:\{enabled:(?:!0|true),/g;
+const adsOff = /ads:\{enabled:(?:!1|false),/g;
+const onCount = (js.match(adsOn) ?? []).length;
+const offCount = (js.match(adsOff) ?? []).length;
+let adsNote;
+if (onCount === 1 && offCount === 0) {
+  js = js.replace(adsOn, 'ads:{enabled:!1,');
+  writeFileSync(bundlePath, js);
+  adsNote = 'Werbe-Platzhalter abgeschaltet (ads.enabled = false)';
+} else if (onCount === 0 && offCount === 1) {
+  adsNote = 'Werbung ist im Build bereits abgeschaltet';
+} else {
+  throw new Error(
+    `Werbe-Schalter (ads.enabled) in ${bundles[0]} nicht eindeutig gefunden (an: ${onCount}, aus: ${offCount}). ` +
+      'Bitte prüfen, ob der Build jetzt echte Werbung enthält oder die Konfiguration anders aufgebaut ist.',
+  );
+}
 
 // Anpassungen für die native App. Das Skript steht vor dem Spielcode und läuft vor ihm
 // (Modul-Skripte werden erst nach dem Parsen ausgeführt). Im normalen Browser tut es nichts.
@@ -52,4 +82,4 @@ const marker = '<script type="module"';
 if (!html.includes(marker)) throw new Error('index.html: Modul-Skript des Spiels nicht gefunden');
 html = html.replace(marker, `${nativeScript}\n    ${marker}`);
 writeFileSync(indexPath, html);
-console.log(`www/ vorbereitet: ${items.join(', ')} – index.html für die native App angepasst`);
+console.log(`www/ vorbereitet: ${items.join(', ')} – index.html für die native App angepasst; ${adsNote}`);
