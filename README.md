@@ -12,7 +12,9 @@ unverändert im Repo-Stamm, GitHub Pages läuft weiter wie bisher.
 
 Voraussetzungen: Mac mit aktuellem Xcode, Node.js 20 oder neuer, Mitgliedschaft im Apple Developer Program.
 
-1. `npm install` – lädt Capacitor und das Haptics-Plugin nach `node_modules/` (Xcode braucht den Ordner).
+1. `npm install` – lädt Capacitor sowie die Plugins Haptics und Preferences nach `node_modules/`
+   (Xcode braucht den Ordner). Preferences ist Pflicht: Das Spiel speichert in der nativen App darüber,
+   ohne das Plugin gingen Spielstände auf dem iPhone stillschweigend verloren.
 2. `npm run sync:ios` – kopiert die Web-Dateien nach `www/`, passt `index.html` für die App an
    (Vollbild-Button samt Safari-Hinweis ausgeblendet, Vibrations-Schalter über die iOS-Haptik,
    Werbe-Platzhalter des Spiels abgeschaltet, Datenschutz-Link auf dem Titelbildschirm)
@@ -27,7 +29,9 @@ Voraussetzungen: Mac mit aktuellem Xcode, Node.js 20 oder neuer, Mitgliedschaft 
 Bereits eingerichtet: App-Icon (1024 px), Startbildschirm mit Logo, nur Querformat,
 Statusleiste ausgeblendet, Export-Compliance (keine eigene Verschlüsselung), Sprachen Deutsch und Englisch,
 Datenschutz-Link auf dem Titelbildschirm neben der Versionsnummer. Er öffnet die mitgelieferte `privacy.html`
-mit „Zurück zum Spiel“ oben, Links zu fremden Seiten öffnen Safari.
+mit „Zurück zum Spiel“ oben, Links zu fremden Seiten öffnen Safari. Privacy-Manifest der App
+(`ios/App/App/PrivacyInfo.xcprivacy`): deklariert den UserDefaults-Zugriff des Preferences-Plugins mit
+Grund CA92.1, wie Apple es seit 2024 für den Upload verlangt.
 
 Achtung Werbung: Das Spiel enthält Belohnungs-Werbung nur als Attrappe (Dialog „Werbung (Platzhalter)“).
 Apple lehnt Platzhalter-Inhalte ab, deshalb schaltet `npm run www` sie in der App-Kopie ab. Die Web-Version im

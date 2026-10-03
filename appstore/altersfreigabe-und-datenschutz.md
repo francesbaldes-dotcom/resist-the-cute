@@ -28,7 +28,7 @@ Voraussichtliches Ergebnis: 9+.
 - Datenerhebung: **Keine Daten erhoben.** Die App sendet nichts an Server und enthält keine Software von Dritten, die Daten erhebt.
 - Tracking: Nein.
 - Datenschutz-URL: https://francesbaldes-dotcom.github.io/resist-the-cute/privacy.html
-- Die Datenschutz-Deklaration, die Apple für Bibliotheken verlangt, steckt in der mitgelieferten Capacitor-Bibliothek.
+- Privacy-Manifeste: Die Capacitor-Bibliothek bringt ihr eigenes mit. Die App hat zusätzlich `ios/App/App/PrivacyInfo.xcprivacy`, das den Zugriff auf UserDefaults durch das Preferences-Plugin (Spielstand) mit Grund CA92.1 deklariert. Ohne diese Angabe weist App Store Connect den Upload ab.
 
 ## Exportbestimmungen
 
