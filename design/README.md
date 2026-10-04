@@ -18,6 +18,7 @@ Dieses Paket enthält alles, was das Quellprojekt zum Einbauen braucht. Das Einb
 | `icons/src/` | Generator: `primitives.mjs` (Grundformen), `motifs.mjs` (Motiv je Knoten), `build.mjs`, `build-ui.mjs`, `rasterize.mjs` |
 | `fonts/` | Fredoka als variable Schrift (Latin, Latin Extended), `fredoka.css`, Lizenz `OFL.txt` |
 | `reference/UiButton.ts` | Button-Klasse für Phaser 3 im neuen Stil, Ersatz für die bisherige Klasse |
+| `UEBERGABE.md` | Zusammenfassung für die Sitzung im Quellprojekt: optische Änderungen und Tutorial-Änderungen in einer Datei |
 
 Dateinamen der Masterplan-Symbole entsprechen den Knoten-IDs im Spiel, Punkte durch Bindestriche ersetzt:
 `I-a.svg` für Knoten `I.a`, `bridge-IO.svg`, `kind-doctrine.svg`, `school-X.svg`, `bp-paw.svg`.
