@@ -11,7 +11,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const www = join(root, 'www');
-const items = ['index.html', 'assets', 'icons', 'manifest.webmanifest', 'privacy.html'];
+// fonts/: Schrift Fredoka (seit Build 37f6ebb), index.html bindet fonts/fredoka.css ein
+const items = ['index.html', 'assets', 'icons', 'fonts', 'manifest.webmanifest', 'privacy.html'];
 
 for (const item of items) {
   if (!existsSync(join(root, item))) throw new Error(`Datei fehlt im Repo-Stamm: ${item}`);
