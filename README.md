@@ -48,6 +48,13 @@ Build-Prüfung ohne Mac: Der Workflow `.github/workflows/ios-build.yml` baut die
 iOS-Projekt oder die Web-Dateien berührt, auf einem Mac-Rechner von GitHub Actions. Ohne Signatur und ohne
 Upload, nur als Nachweis, dass alles zusammen kompiliert. Das Ergebnis steht unter „Actions“ im Repository.
 
+## Design-Paket (Buttons, Symbole, Schrift)
+
+Unter `design/` liegt das Paket zur Umsetzung des neuen Designs: 161 Symbole als SVG und PNG (Spezialkräfte,
+Leiste, Masterplan), die Schrift Fredoka mit Lizenz, eine Button-Klasse für Phaser und die Anleitung zum Einbauen
+ins Quellprojekt (`design/ANLEITUNG.md`). Das Spiel in diesem Repository ist davon unverändert, eingebaut wird im
+Quellprojekt.
+
 Hinweis für den Build-Prozess der Web-App: Beim Veröffentlichen eines neuen Builds in dieses Repo
-dürfen `ios/`, `appstore/`, `scripts/`, `.github/`, `privacy.html`, `package.json`, `package-lock.json`,
+dürfen `ios/`, `appstore/`, `design/`, `scripts/`, `.github/`, `privacy.html`, `package.json`, `package-lock.json`,
 `capacitor.config.json` und `.gitignore` nicht gelöscht werden.
