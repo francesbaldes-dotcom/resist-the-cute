@@ -34,8 +34,8 @@ Das Video liegt danach in Fotos. Bei über etwa 200 MB in iMovie mit 720p export
 
 ## Antworttext (Englisch, zum Einfügen)
 
-Die Prüfung arbeitet auf Englisch; die deutsche Mail ist übersetzt. Vor dem Absenden die eckigen Klammern ausfüllen
-und Punkt 6 prüfen: Die Aussage, dass Grafik, Musik und Töne eigene Arbeit sind, muss stimmen.
+Die Prüfung arbeitet auf Englisch; die deutsche Mail ist übersetzt. Der Text ist ohne Platzhalter und kann so abgeschickt
+werden. Punkt 6 sagt aus, dass Grafik, Musik und Töne eigene Arbeit sind.
 
 ```text
 Hello App Review team,
@@ -45,7 +45,7 @@ thank you for your note. Here is the requested information.
 Resist the Cute is a small single-player tower-defense game. It has no user accounts, no user-generated content, no in-app purchases, no advertising and no network features, so none of the account, user-content or paid-content flows apply.
 
 1. Screen recording
-The attached recording was made on an iPhone [Modell] running iOS [Version]. It starts with the app launch and shows the typical flow: title screen and settings, starting a new game, the in-game tutorial, building and upgrading gadgets, starting waves, using a special power, the Master Plan (skill tree), pausing, saving and continuing a game, and the privacy page.
+The attached recording was made on a physical iPhone running the latest iOS release. It starts with the app launch and shows the typical flow: title screen and settings, starting a new game, the in-game tutorial, building and upgrading gadgets, starting waves, using a special power, the Master Plan (skill tree), pausing, saving and continuing a game, and the privacy page.
 
 2. Purpose and audience
 Resist the Cute is a casual tower-defense game for one player. You play a cartoon villain whose lair is stormed by cute animals (kittens, bunnies, chicks) that want to cuddle it. You build gadgets on the floors of your tower, upgrade them, start waves and unlock special powers and skills. It is made for casual players of all ages who enjoy light strategy. The humor is family-friendly and there is no realistic violence: defeated animals simply run home. The game works completely offline, with no accounts, no in-app purchases and no advertising. Its benefit is a self-contained session of a few minutes with long-term progression (Master Plan, heroes, legacy bonuses) for players who keep going.
