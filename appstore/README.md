@@ -39,3 +39,7 @@ Die Bilder entstehen am echten Gerät oder im Xcode-Simulator, denn nur dort sti
 5. Boss-Kampf
 
 Passende Überschriften stehen am Ende von `de.md` und `en.md`.
+
+## Rückfrage der App-Prüfung
+
+`app-review-antwort.md`: Antwort auf die Nachfrage nach Richtlinie 2.1 (Informationen für neue Entwicklerkonten) mit Ablauf für die Bildschirmaufnahme und dem Antworttext.
