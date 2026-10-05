@@ -156,6 +156,10 @@ const inject = (anchor, text, before) => {
   if (privacy.split(anchor).length !== 2) throw new Error(`privacy.html: "${anchor}" nicht genau einmal gefunden`);
   privacy = privacy.replace(anchor, before ? `${text}${anchor}` : `${anchor}${text}`);
 };
+// Die App schaltet das Scrollen des WebViews ab (capacitor.config.json, scrollEnabled: false), damit sich das Spiel
+// nicht verschiebt. Die Datenschutzseite scrollt deshalb in sich selbst: html bleibt fest, body wird zum Scrollbereich.
+inject('</style>', '  html { height: 100%; overflow: hidden; }\n  body { height: 100%; box-sizing: border-box; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-left: max(1.25rem, env(safe-area-inset-left)); padding-right: max(1.25rem, env(safe-area-inset-right)); }\n', true);
+privacy = privacy.replace('<meta name="viewport" content="width=device-width, initial-scale=1">', '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">');
 inject('</style>', '  .zurueck { position: sticky; top: 0; z-index: 1; margin: -1.5rem -1.25rem 0; padding: .9rem 1.25rem; background: var(--bg); border-bottom: 1px solid var(--line); font-weight: 600; }\n  #de, #en { scroll-margin-top: 4.5rem; }\n', true);
 inject('<body>', '\n<p class="zurueck"><a href="./" id="zurueck">← Zurück zum Spiel</a></p>', false);
 inject('</body>', "<script>if (location.hash === '#en') { var z = document.getElementById('zurueck'); if (z) z.textContent = '← Back to the game'; }</script>\n", true);
